@@ -1,0 +1,3 @@
+export default {
+  UPDATE_NOTE_TREE: 'UPDATE_NOTE_TREE_OBJECT',
+};

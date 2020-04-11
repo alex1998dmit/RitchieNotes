@@ -1,0 +1,83 @@
+.mind-table-block {
+    display: flex;
+    height: 1000px;
+}
+
+.mind-table-block .table-col {
+    width: 20%;
+    height: 100%;
+    /* padding: 0.5em; */
+}
+
+.mind-table-block .table-col .table-row {
+    padding: 0.25em;    
+}
+
+.mind-table-block .table-col .table-row .options {
+    position: absolute;
+    left: 61%;
+    top: 0%;
+}
+
+.mind-table-block .table-col .table-row .options .option {
+
+}
+
+.mind-table-block .table-col .table-row .options button{
+
+}
+
+.mind-table-block .table-col .table-row .item {
+    height: 95%;
+    width: 100%;
+}
+
+.mind-table-block .table-col .table-row .item.active {
+    cursor: pointer;
+    background: #FFFFFF;
+    border: 1px solid #F6F6FA;
+    box-shadow: 0px 4px 64px rgba(159, 169, 188, 0.24);
+    border-radius: 12px;
+}
+
+.mind-table-block .table-col .table-row .item.active:hover {
+    box-shadow: 0px 1px 8px #80bdff;
+}
+
+.mind-table-block .table-col .table-row .item.active .quick-options {
+    height: 20%;
+    text-align: right;
+}
+
+.mind-table-block .table-col .table-row .item.active .quick-options button {
+    background: transparent;
+    color: rgba(0,0,0,.6);
+    transition: transform 85ms ease-in;
+    border: none;
+}
+
+.mind-table-block .table-col .table-row .item.active .quick-options button:hover {
+    color: black;
+}
+
+.mind-table-block .table-col .table-row .item.active .title {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mind-table-block .table-col .table-row .item.active .title h5 {
+    font-size: 0.8em;
+}
+
+.mind-table-block .table-col .table-row .item.active .desc {
+    height: 80%;
+    margin: auto;
+    /* padding: 10px; */
+    text-align: center;
+}
+
+.mind-table-block .table-col .table-row .item.empty {
+    border-color: white;
+}

@@ -1,0 +1,21 @@
+.list-item {
+
+}
+
+input, textarea {
+    outline: none;
+}
+
+.list-item.bordered {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid black;
+}
+
+.input-title {
+    border: 0px;
+    border-bottom: 1px solid #ced4da;
+}
+
+.btn-option {
+    border: 0px;
+    }
