@@ -51,7 +51,7 @@ const updateNode = (nodeId, item, tree) => {
   return newObj;
 };
 
-export default {
+module.exports = {
   removeNodeFromTree,
   findNodeById,
   addNode,

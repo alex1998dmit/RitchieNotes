@@ -15,15 +15,18 @@ module.exports = {
     signUp: async (req, res, next) => {
         const { email, password } = req.body;
 
-        const foundUser = await User.findOne({ email });
+        const foundUser = await User.findOne({ "local.email": email });
         if (foundUser) {
             return res.status(403).json({
                 error: 'email arleady in use',
             })
         }
         const newUser = new User({
-            email,
-            password,
+            method: 'local',
+            local: {
+                email: email,
+                password: password,
+            }
         });
         await newUser.save();
 
@@ -32,6 +35,11 @@ module.exports = {
         res.status(200).json({ token })
     },
     signIn: (req, res) => {
+        const token = signToken(req.user);
+        res.status(200).json({ token });
+    },
+    googleOAuth: async (req, res) => {
+        console.log('req user', req.user);
         const token = signToken(req.user);
         res.status(200).json({ token });
     },
