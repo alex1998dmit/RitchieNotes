@@ -20,7 +20,6 @@
     "passport": "^0.4.1",
     "passport-google-plus-token": "^2.1.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "react-router-dom": "^5.1.2"
+    "passport-local": "^1.0.0"
   }
 }

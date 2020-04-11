@@ -1,0 +1,18 @@
+.sign-up-block {
+
+}
+
+.sign-up-block .sign-up-form {
+  
+}
+
+.sign-up-block .sign-up-form .oauth-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-up-block .sign-up-form .oauth-buttons button {
+  border: 1px solid black;
+  margin-bottom: 1em;
+}
