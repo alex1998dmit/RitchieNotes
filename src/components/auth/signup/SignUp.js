@@ -1,17 +1,36 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import to from 'await-to-js';
+import { withRouter } from "react-router";
 import './SignUp.css';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-export default () => {
-  const { register, handleSubmit } = useForm();
-  const formHandler = data => {
-    console.log(data);
+import { authActions } from '../../../store/actions';
+
+import Preloader from '../../utils/preloader';
+
+const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => {
+  const { register, handleSubmit, errors } = useForm();
+  const formHandler = async (data) => {
+    const [e, token] = await to(signUp(data));
+    if (e) {
+      console.log(e)
+      throw e;
+    }
+    const [eAboutUser] = await to(aboutUser(token));
+    if (eAboutUser) {
+      throw eAboutUser;
+    }
+    history.push('/myaccount');
   };
+
   return (
     <div className="sign-up-block">
       <div className="row">
         <div className="col-12 mb-1">
           <h2>Sign Up</h2>
+          {/* {err && <div class="alert alert-danger" role="alert"> {err} </div>} */}
         </div>        
         <div className="col-md-6 sign-up-form">
           <p>Sign up system by default</p>
@@ -25,6 +44,7 @@ export default () => {
                 id="email"
                 className="form-control"
                 placeholder="example@gmail.com"
+                required
               />
             </div>
             <div className="form-group">
@@ -34,18 +54,15 @@ export default () => {
                 type="password"
                 name="password"
                 id="password"
-                className="form-control"                
+                className="form-control"
+                required
               />
             </div>
             <div className="form-group">
-              <input type="submit" className="btn btn-primary" value="SignUp" />
+              {isLoading ? <Preloader /> : <input type="submit" className="btn btn-primary" value="SignUp" />}
             </div>
           </form>
           <hr/>
-          <div className="oauth-buttons">
-            <button className="btn btn-default">Sign Up with Gmail</button>
-            <button className="btn btn-default">Sign Up with Facebook</button>
-          </div>          
         </div>
         <div className="col-md-6">
           
@@ -53,4 +70,20 @@ export default () => {
       </div>
     </div>
   )
-}
+};
+
+const mapStateToProps = state => {
+  console.log(state.auth);
+  const { err, isLoading } = state.auth;
+  return {
+    err,
+    isLoading,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  signUp: data => dispatch(authActions.signUp(data)),
+  aboutUser: token => dispatch(authActions.aboutUser(token)),
+});
+
+export default withRouter(compose(connect(mapStateToProps, mapDispatchToProps))(SignUp));

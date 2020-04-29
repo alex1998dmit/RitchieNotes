@@ -1,12 +1,17 @@
 const express = require('express');
+const passport = require('passport');
+// const passportConf = require('../passport');
 
-const NotesController = require('../controllers/note.tree.controller');
+const NotesTreeContoller = require('../controllers/note.tree.controller');
+
+// const passportSignIn = passport.authenticate('local', { session: false });
+const passportJWT = passport.authenticate('jwt', { session: false });
 
 const router = express.Router()
 
-// router.get('/:id', NotesController.getNote);
-// router.get('/:id/update', NotesController.update)
-// router.
-// router.post('/signup', UserController.signUp);
+router.get('/', passportJWT, NotesTreeContoller.getUserItems);
+router.get('/:id', passportJWT, NotesTreeContoller.getItem);
+
+router.post('/', passportJWT, NotesTreeContoller.addNoteTreeItem);
 
 module.exports = router;

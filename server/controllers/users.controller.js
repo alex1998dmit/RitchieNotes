@@ -9,12 +9,11 @@ const signToken = user => {
         iat: new Date().getTime(),
         exp: new Date().setDate(new Date().getDate() + 1), // one day 
     }, JWT_SECRET);
-}
+};
 
 module.exports = {
-    signUp: async (req, res, next) => {
+    signUp: async (req, res, next) => {        
         const { email, password } = req.body;
-
         const foundUser = await User.findOne({ "local.email": email });
         if (foundUser) {
             return res.status(403).json({
@@ -38,20 +37,10 @@ module.exports = {
         const token = signToken(req.user);
         res.status(200).json({ token });
     },
-    googleOAuth: async (req, res) => {
-        console.log('req user', req.user);
-        const token = signToken(req.user);
-        res.status(200).json({ token });
+    about: (req, res) => {
+        return res.status(200).json({ user: req.user });
     },
-    secret:(req, res) => {
-        console.log(`I'm here is main`);
+    signOut: () => {
+        
     },
-    test: (req, res) => {
-        res.json('VAlue');
-    },
-    getNotes: async (req, res, next) => {
-        const { userId } = req.params;
-        const user = await User.findById(userId);
-
-    }
-}
+};

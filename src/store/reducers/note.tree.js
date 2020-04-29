@@ -1,4 +1,5 @@
 import { noteTreeConstants } from '../constants';
+import noteTree from '../services/note.tree';
 
  const initialTree = {
   id: 0,
@@ -109,10 +110,30 @@ import { noteTreeConstants } from '../constants';
   ],
 };
 
-export default (state = initialTree, action) => {
+const initState = {
+    isLoading: false,
+    items: [],
+}
+
+export default (state = initState, action) => {
   switch(action.type) {
     case noteTreeConstants.UPDATE_NOTE_TREE:
       return action.newTree;
+    case noteTreeConstants.GET_USER_ITEMS_REQUEST:
+        return {
+            ...state,
+            isLoading: true,
+        };
+    case noteTreeConstants.GET_USER_ITEMS_SUCCESS:
+        return {
+            ...state,
+            items: action.payload,
+        };
+    case noteTreeConstants.GET_USER_ITEMS_FAILURE:
+        return {
+            ...state,
+            err: action.payload
+        };
     default:
       return state;
   };

@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const NoteTree = require('../models/note.tree');
 const User = require('../models/user');
 
@@ -10,6 +12,34 @@ const {
 
 module.exports = {
     // work wtih note tree
+    addNoteTreeItem: async (req, res) => {
+        const { tree, questions } = req.body;
+        const { user } = req;
+        const newNote = new NoteTree({
+            tree,
+            questions,
+            user: user._id,
+        });
+        await newNote.save();
+        user.notes = [...user.notes, newNote._id];
+        await user.save();
+        res.status(200).json({ msg: 'success' });
+    },
+    getUserItems: async (req, res) => {
+        const { user } = req;
+        const noteTreeIds = user.notes;
+        // const noteTreeIds = user.notes.map(id => mongoose.Types.ObjectId(id));
+
+        const notes = await NoteTree.find({
+            '_id': {
+                $in : noteTreeIds,
+            },
+        });
+        return res.status(200).json({ items: notes });
+    },
+    getItem: async (req, res) => {
+    },
+    // ------ below is trash
     getNoteTree: async (req, res) => {
         const { id } = req.params;
         const item = NoteTree.findById(id);

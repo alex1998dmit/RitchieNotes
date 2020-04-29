@@ -1,5 +1,38 @@
 import { noteTreeConstants } from '../constants';
+import { noteTreeService } from '../services';
+import to from 'await-to-js';
 import store from '../';
+
+const getUserItems = () => {
+  const request = () => {
+    return {
+      type: noteTreeConstants.GET_USER_ITEMS_REQUEST,
+    };
+  };
+  const success = items => {
+    return {
+      type: noteTreeConstants.GET_USER_ITEMS_SUCCESS,
+      payload: items,
+    };
+  };
+  const failure = err => {
+    return {
+      type: noteTreeConstants.GET_USER_ITEMS_FAILURE,
+      payload: err,
+    };
+  };
+
+  return async dispatch => {
+    dispatch(request());
+    const [err, items] = await to(noteTreeService.getItems());
+    if (err) {
+      dispatch(failure(err));
+      throw err;
+    }
+    dispatch(success(items));
+    return items;
+  };
+};
 
 const updateNode = (nodeId, item) => {
   let newTree = {};
@@ -59,6 +92,7 @@ const removeNodeFromTree = (nodeId) => {
 };
 
 export default {
+  getUserItems,
   updateNode,
   addChildNode,
   removeNodeFromTree
