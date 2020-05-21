@@ -11,6 +11,8 @@ const router = express.Router()
 
 router.get('/', passportJWT, NotesTreeContoller.getUserItems);
 router.get('/:id', passportJWT, NotesTreeContoller.getItem);
+router.put('/:id', passportJWT, NotesTreeContoller.updateItem);
+router.get('/:id/tags', passportJWT, NotesTreeContoller.getItemTags);
 
 router.post('/', passportJWT, NotesTreeContoller.addNoteTreeItem);
 

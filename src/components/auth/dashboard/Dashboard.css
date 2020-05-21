@@ -2,7 +2,15 @@
 
 }
 
-.dashboard .note-tree-items {
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+}
+
+/* notes */
+.dashboard .notes-block {
   background: #FFFFFF;
   /* Gray 4 */
   border: 1px solid #F6F6FA;
@@ -12,7 +20,51 @@
   padding: 2em;
 }
 
-.dashboard .note-tree-items .note-tree-block .color-block {
-  background-color: lightseagreen;
+.dashboard .notes-block .note {
+  height: 150px;
+  background: #FFFFFF;
+  border: 1px solid #F6F6FA;
+  box-shadow: 0px 4px 64px rgba(159, 169, 188, 0.24);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard .notes-block .note-add {
+  height: 150px;
+  background: #FFFFFF;
+  border: 3px dotted grey;
+  box-shadow: 0px 4px 64px rgba(159, 169, 188, 0.24);
+  color: grey;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard .notes-block .note-add:hover {
+  border-color: black;
+  color: black;
+}
+
+.dashboard .notes-block .note .header {
+  /* padding: 2em 1em;  */
+  display: flex;
+  align-items: center;
   height: 50px;
+  padding: 1em;
+}
+
+.dashboard .notes-block .note .header .color-icon {
+  width: 20%;
+  background-color: lightseagreen;
+  border-radius: 12px;
+  height: 15px; 
+  margin-right: 1em;
+}
+
+.dashboard .notes-block .note .footer {
+  padding: 1em;
+  font-size: 0.6em;
 }

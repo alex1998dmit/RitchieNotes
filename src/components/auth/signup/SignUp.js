@@ -36,6 +36,18 @@ const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => 
           <p>Sign up system by default</p>
           <form action="" onSubmit={handleSubmit(formHandler)}>
             <div className="form-group">
+              <label htmlFor="#email">Name</label>
+              <input
+                ref={register}
+                type="text"
+                name="name"
+                id="name"
+                className="form-control"
+                placeholder="Dennis Ritchey"
+                required
+              />
+            </div>
+            <div className="form-group">
               <label htmlFor="#email">Email</label>
               <input
                 ref={register}
@@ -55,8 +67,15 @@ const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => 
                 name="password"
                 id="password"
                 className="form-control"
+                placeholder="your password"
                 required
               />
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="" id="agreeWithTerms" />
+              <label className="form-check-label" for="agreeWithTerms">
+                I agree with a <a href="#some">terms</a>
+              </label>
             </div>
             <div className="form-group">
               {isLoading ? <Preloader /> : <input type="submit" className="btn btn-primary" value="SignUp" />}

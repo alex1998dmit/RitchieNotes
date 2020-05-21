@@ -1,0 +1,21 @@
+.node-list-note input, textarea {
+  outline: none;
+}
+
+.node-list-note  .list-item.bordered {
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid black;
+}
+
+.node-list-note  .input-title {
+  border: 0px;
+  border-bottom: 1px solid #ced4da;
+}
+
+.node-list-note  .btn-option {
+  border: 0px;
+}
+
+.node-list-note  .btn-option svg {
+  font-size: 0.9em;
+} 

@@ -9,6 +9,10 @@ const NoteTree = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'user',
         },
+        tags: [{
+            type: Schema.Types.ObjectId,
+            ref: 'tag',
+        }],
     },
     {
         timestamps: true,

@@ -35,7 +35,7 @@ const signUp = data => {
     const [err, resp] = await to(
       axios.post(`${axiosConfigs.host}/auth/signup`, data)
     );
-    if (err) {
+  if (err) {
       dispatch(failure(err));
       throw err;
     }

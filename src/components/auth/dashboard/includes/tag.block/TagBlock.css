@@ -1,0 +1,97 @@
+.tags-block {
+  margin-bottom: 5em;
+}
+
+.tags-block .title {
+  margin-bottom: 1em;
+}
+
+.tag-block {
+  background: #FFFFFF;
+  border: 1px solid #F6F6FA;
+  box-shadow: 0px 4px 64px rgba(159, 169, 188, 0.24);
+  border-radius: 12px;
+  padding: 1em;
+  font-size: 0.8em;
+  margin-right: 3em;
+  margin-bottom: 1em;
+}
+
+.tag-block.tag-is-invalid {
+  border: 1px solid red;
+}
+  
+.tag-block.tag-is-invalid .invalid-msg {
+  color: red;
+  font-weight: bold;
+}
+ 
+
+/* close icon button */
+.tag-container .close-icon button {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.2em;
+}
+
+.tag-container .close-icon svg {
+  font-size: 0.8em;
+}
+
+
+.add-tag-button {
+  background: #FFFFFF;
+  border: 2px dotted grey;
+  box-shadow: 0px 4px 64px rgba(159, 169, 188, 0.24);
+  border-radius: 12px;
+  padding: 1em;
+  font-size: 0.8em;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 3em;
+  margin-bottom: 1em;
+}
+
+.add-tag-button:hover {
+  border-color: black;
+  color: black;
+}
+
+.tag-block.active {
+  font-weight: 700;
+  /* border: 1px solid royalblue; */
+}
+
+.dashboard .tags-block .tag-block.add-tag {
+
+}
+
+.tag-block.add-tag input[type="text"] {
+  width: 60%;
+  border: 0px;
+  font-size: 0.8em;
+  /* border-bottom: 1px solid grey; */
+}
+
+.tag-block.add-tag input[type="submit"] {
+  width: 25%;
+  font-size: 0.8em;
+  border: 0px;
+}
+
+.tag-block.add-tag input[type="submit"] svg {
+  height: 0.5em;
+}
+
+.tag-block.add-tag button {
+  width: 25%;
+  font-size: 0.8em;
+  border: 0px;
+}
+
+.tag-block.add-tag button svg {
+  height: 0.5em;
+}

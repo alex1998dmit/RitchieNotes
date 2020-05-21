@@ -7,7 +7,8 @@ const cookieSession = require('cookie-session');
 
 const db = require('./db');
 const userRoutes = require('./routes/user.routes');
-const notesTreeRoutes = require('./routes/note.tree.router');
+const notesTreeRoutes = require('./routes/note.router');
+const tagsRoutes = require('./routes/tag.routes');
 // const notesTreeRouter = require('./routes/note.tree.router');
 const { COOKIE_KEY } = require('./configs');
 
@@ -33,7 +34,8 @@ app.use(passport.session());
 
 // routes
 app.use('/api/auth', userRoutes);
-app.use('/api/notestree', notesTreeRoutes);
+app.use('/api/notes', notesTreeRoutes);
+app.use('/api/tags', tagsRoutes);
 
 // production
 const path = require('path');

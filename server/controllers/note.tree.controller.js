@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-
+const to = require('await-to-js').default;
 const NoteTree = require('../models/note.tree');
 const User = require('../models/user');
+const Tag = require('../models/tag');
 
-const { 
+const {
     removeNodeFromTree,
     findNodeById,
     addNode,
@@ -38,6 +38,39 @@ module.exports = {
         return res.status(200).json({ items: notes });
     },
     getItem: async (req, res) => {
+        const { id } = req.params;
+
+        const [err, note] = await to(NoteTree.findById(id));
+        if (err) {
+            return res.status(500).json({ msg: 'Error with finding note' });
+        }
+        return res.status(200).json({ item: note });
+    },
+    getItemTags: async (req, res) => {
+        const { id } = req.params;
+        const [err, note] = await to(NoteTree.findById(id));
+        if (err) {
+            return res.status(500).json({ msg: 'Error with getting note tags' });
+        }
+        const tagIds = note.tags;
+        const [tagErr, tags] = await to(Tag.find({
+            '_id': {
+                $in: tagIds,
+            },
+        }));
+        if (tagErr) {
+            return res.status(500).json({ msg: 'Error with getting note tags' });
+        }
+        return res.status(200).json({ items: tags });
+    },
+    updateItem: async (req, res) => {
+        const { id } = req.params;
+        const { body } = req;
+        const [err, note] = await to(NoteTree.findByIdAndUpdate(id, body, { new: true }));
+        if (err) {
+            return res.status(500).json({ msg: 'Can not update note' });
+        }
+        return res.status(200).json({ item: note });
     },
     // ------ below is trash
     getNoteTree: async (req, res) => {
@@ -74,32 +107,4 @@ module.exports = {
         await user.save();
         res.status(201).json(noteTree);
     },
-    // work with nodes
-    getNode: async (req, res) => {
-        const { noteId, nodeId } = req.params;
-        const { tree } = NoteTree.findById(noteId);
-        const node = findNodeById(nodeId, tree);
-        return res.status(200).json({ data: { node } });
-    },
-    addNode: async (req, res) => {
-        const { noteId } = req.params;
-        const { item, nodeId } = req.body;
-        const { tree } = NoteTree.findById(noteId);
-        const updatedTree = addNode(nodeId, item, tree);
-        return res.status(201).json({ data: { tree: updatedTree }});
-    },
-    updateNode: async (req, res) => {
-        const { noteId } = req.params;
-        const { item, nodeId } = req.body;
-        const { tree } = NoteTree.findById(noteId);
-        const updatedTree = updateNode(nodeId, item, tree);
-        return res.status(201).json({ data: { tree: updatedTree }});
-    },
-    removeNode: async (req, res) => {
-        const { noteId } = req.params;
-        const { nodeId } = req.body;
-        const { tree } = NoteTree.findById(noteId);
-        const updatedTree = removeNodeFromTree(nodeId, tree);
-        return res.status(201).json({ data: { tree: updatedTree }});
-    }
 };
