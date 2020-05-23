@@ -13,7 +13,7 @@ const signToken = user => {
 
 module.exports = {
     signUp: async (req, res, next) => {        
-        const { email, password } = req.body;
+        const { email, password, name } = req.body;
         const foundUser = await User.findOne({ "local.email": email });
         if (foundUser) {
             return res.status(403).json({
@@ -23,8 +23,9 @@ module.exports = {
         const newUser = new User({
             method: 'local',
             local: {
-                email: email,
-                password: password,
+                name,
+                email,
+                password,
             }
         });
         await newUser.save();

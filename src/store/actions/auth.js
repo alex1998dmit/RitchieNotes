@@ -66,7 +66,7 @@ const signIn = data => {
   return async dispatch => {
     dispatch(request());
     const [err, resp] = await to(
-      `${axiosConfigs.host}/auth/signin`
+      axios.post(`${axiosConfigs.host}/auth/signin`, data)
     );
     if (err) {
       dispatch(failure(err));

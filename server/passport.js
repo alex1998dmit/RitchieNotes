@@ -38,7 +38,6 @@ passport.use(new LocalStrategy({
             return done(null, false);
         }
         // Check if the password is correct
-        console.log()
         const isMatch = await user.isValidPassword(password);
         if (!isMatch) {
             return done(null, false);

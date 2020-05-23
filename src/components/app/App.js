@@ -21,7 +21,13 @@ function App({ user, aboutUser }) {
       const token = localStorage.getItem('token');
       const [err] = await to(aboutUser(token));
       if (err) {
-        console.log(err);
+        switch(err.status.code){
+          case 404:
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            break;
+          default:
+        }
         throw err;
       }
     }
@@ -32,7 +38,7 @@ function App({ user, aboutUser }) {
   }, [aboutUser]);
   return (
     <div className="App">
-      <Header />
+      <Header/>
       <div className="container">
         <Switch>
           {/* auth */}

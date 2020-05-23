@@ -15,12 +15,12 @@ const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => 
   const formHandler = async (data) => {
     const [e, token] = await to(signUp(data));
     if (e) {
-      console.log(e)
+      console.log(e);
       throw e;
     }
-    const [eAboutUser] = await to(aboutUser(token));
-    if (eAboutUser) {
-      throw eAboutUser;
+    const [errAboutUser] = await to(aboutUser(token));
+    if (errAboutUser) {
+      throw errAboutUser;
     }
     history.push('/myaccount');
   };
@@ -73,7 +73,7 @@ const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => 
             </div>
             <div className="form-check">
               <input className="form-check-input" type="checkbox" value="" id="agreeWithTerms" />
-              <label className="form-check-label" for="agreeWithTerms">
+              <label className="form-check-label" htmlFor="agreeWithTerms">
                 I agree with a <a href="#some">terms</a>
               </label>
             </div>
@@ -92,7 +92,6 @@ const SignUp = ({ signUp, aboutUser, oauthGoogle, err, history, isLoading }) => 
 };
 
 const mapStateToProps = state => {
-  console.log(state.auth);
   const { err, isLoading } = state.auth;
   return {
     err,
